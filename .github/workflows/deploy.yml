@@ -1,0 +1,26 @@
+name: Deploy to github pages
+on:
+ push:
+  branches: [ main ]
+jobs:
+ gh-pages-deploy:
+  runs-on: ubuntu-latest
+  steps:
+   - name: Checkout branch
+     uses: actions/checkout@v2
+   - name: Setup Node.js for use with actions
+     uses: actions/setup-node@v2
+     with:
+      version: 18
+   - name: Clean install dependencies
+     run: npm ci
+   - name: Deploy with gh-pages
+     env:
+      MY_EMAIL: yagellonikita94@gmail.com
+      MY_NAME: NikitaYagello
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+     run: |
+       git config --global user.email $MY_EMAIL
+       git config --global user.name $MY_NAME
+       git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+       npm run deploy
