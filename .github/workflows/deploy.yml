@@ -1,13 +1,13 @@
-name: Deploy
+name: Release
 on:
   push:
     branches:
-      - feat-2
+      - main
 permissions:
   contents: read
 jobs:
   release:
-    name: Deploy
+    name: Release
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -31,7 +31,7 @@ jobs:
       - name: Verify the integrity of provenance attestations and registry signatures for installed dependencies
         run: npm audit signatures
 
-      - name: Deploy
+      - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npx semantic-feat-2
+        run: npx semantic-release
