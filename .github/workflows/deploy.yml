@@ -22,6 +22,6 @@ jobs:
       MY_EMAIL: yagellonikita94@gmail.com
       MY_NAME: NikitaYagello
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-     run: |npx semantic-release
+     run: npx semantic-release
 
      
